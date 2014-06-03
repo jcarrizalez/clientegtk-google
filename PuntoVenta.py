@@ -179,7 +179,7 @@ class SistemaPuntoVenta:
 				 
 				if lista == 'LAIDSOLI':
 					if self.actualizaImpresion(idimpresion,str('3'))== True:
-						print "comprueba nuevamente"
+						print "se comprueba nuevamente"
 						self.impresion()
 						#p = Process(target=self.impresion)
 						#p.start()
@@ -187,9 +187,13 @@ class SistemaPuntoVenta:
 					return True
 					
 				else:
-					self.actualizaImpresion(idimpresion,str('4'))
+                                        if dispositivo== 'NO USAR':
+                                            self.NoExisteImpresora()
+                                        else:
+                                            self.ErrorImpresora()
+                                        self.actualizaImpresion(idimpresion,str('4'))
 					print "malo"
-					self.ErrorImpresora()
+					#self.ErrorImpresora()
 			else:
 				return False
 		else:
@@ -198,6 +202,9 @@ class SistemaPuntoVenta:
 
 	def ErrorImpresora(self) :
 		self.zenyt("ERROR EN LA IMPRESORA\n",'Por Favor Verifique\nSoporte Funcional',"gtk-print")
+       
+        def NoExisteImpresora(self) :
+		self.zenyt("IMPRESORA NO CONFIGURADA\n",'Por Favor Verifique en F2\n',"gtk-print")
 
 	def DestroySistema(self) :
 			self.httpfin()
