@@ -1,0 +1,9 @@
+* { margin:0; padding:0;}
+h2 { font-family:"Courier New", Courier, monospace; font-size:18px; color:#336; }
+.box { height:350px; overflow:scroll; width:500px; border:2px green dashed; margin:0 auto; margin-top:100px; margin-bottom:15px; }
+.liclass { list-style:none; border:1px #999 solid; font-family:"Comic Sans MS", cursive; padding:15px; margin-bottom:7px; }
+.ulclass { list-style-type:none; padding:15px;  }
+a { text-decoration:none; }
+a:hover { text-decoration:underline; color:#036; }
+#box2000 > div{ -webkit-transition: width 0.2s ease; -moz-transition: width 0.2s ease; -o-transition: width 0.2s ease; -ms-transition: width 0.2s ease; 	transition: width 0.2s ease; }
+#box2000 > div:hover{width:150%!important; cursor:pointer;}
