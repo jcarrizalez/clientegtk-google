@@ -1,0 +1,134 @@
+.contentCalculadora {
+    width:330px;
+    margin: 10px auto 0;
+}
+
+.calculatorCalculadora {
+    width:301px;
+    height:auto;
+    padding:10px;
+    margin: auto;
+    background:#232323;
+    border:#000 1px solid;
+    border-radius:7px;
+    -webkit-border-radius:7px;
+    -moz-border-radius:7px;
+    box-shadow:rgba(0,0,0,0.4) 0px 2px 5px, inset rgba(255,255,255,0.9) 0px 1px 1px -1px;
+    -webkit-box-shadow:rgba(0,0,0,0.4) 0px 2px 5px, inset rgba(255,255,255,0.9) 0px 1px 1px -1px;
+    -moz-box-shadow:rgba(0,0,0,0.4) 0px 2px 5px, inset rgba(255,255,255,0.9) 0px 1px 1px -1px;
+    background-image:-moz-linear-gradient(top, #333333, #1f1f1f);
+    background-image:-webkit-linear-gradient(top, #333333, #1f1f1f);
+    background-image:linear-gradient(top, #333333, #1f1f1f);
+    overflow: hidden;
+    text-align: center;
+}
+
+.screenCalculadora {
+    width:295px;
+    height:55px;
+    margin: 12px auto 10px;
+    padding:5px 10px;
+    color:#c0c0c0;
+    text-align: left;
+    font-size: 2.2em;
+    letter-spacing: 3px;
+    overflow:hidden;
+    border:#000 1px solid;
+    border-radius:7px;
+    -webkit-border-radius:7px;
+    -moz-border-radius:7px;
+    box-shadow:inset rgba(0,0,0,1) 0px 1px 4px, inset rgba(225,225,225,0.3) 0px -2px 4px -2px;
+    -webkit-box-shadow:inset rgba(0,0,0,1) 0px 1px 4px, inset rgba(225,225,225,0.3) 0px -2px 4px -2px;
+    -moz-box-shadow:inset rgba(0,0,0,1) 0px 1px 4px, inset rgba(225,225,225,0.3) 0px -2px 4px -2px;
+    background-image: -moz-linear-gradient(top, #3e3e3e 0%, #303030 100%);
+    background-image: -webkit-linear-gradient(top, #3e3e3e 0%, #303030 100%);
+    background-image: linear-gradient(top, #3e3e3e 0%, #303030 100%);
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+.buttonsCalculadora {
+    padding:0;
+    width:323px;
+    margin:auto;
+    overflow: hidden;
+    list-style: none;
+}
+.buttonsCalculadora li {
+    display:inline;
+    float:left;
+    padding:0px;
+    margin-right:13px;
+    margin-bottom:10px;
+}
+
+.buttonsCalculadora li:nth-child(4n) {
+    margin-right:0;
+}
+
+.buttonsCalculadora a{
+    display:block;
+    width:65px;
+    height:48px;
+    padding: 8px 0 12px;
+    color:#c0c0c0 !important;
+    font-family: "Myriad Pro", Arial, sans-serif;
+    font-size:1.6em;
+    font-weight: 500;
+    letter-spacing: -2px;
+    background-color:#2f2f2f;
+    border: #000 1px solid;
+    border-radius:5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow:#000 0px -1px 0px;
+    box-shadow: inset rgba(255,255,255,0.1) 0px 1px 0px, inset rgba(0,0,0,0.2) 0px -2px 2px;
+    -webkit-box-shadow: inset rgba(255,255,255,0.1) 0px 1px 0px, inset rgba(0,0,0,0.2) 0px -2px 2px;
+    -moz-box-shadow: inset rgba(255,255,255,0.1) 0px 1px 0px, inset rgba(0,0,0,0.2) 0px -2px 2px;
+    background-image:-moz-linear-gradient(top, #363636 0%, #313234 40%, #2f2f2f 100%);
+    background-image:-webkit-linear-gradient(top, #363636 0%, #313234 40%, #2f2f2f 100%);
+    background-image:linear-gradient(top, #363636 0%, #313234 40%, #2f2f2f 100%);
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    cursor: pointer;
+}
+
+.buttonsCalculadora a:active{
+    box-shadow: inset rgba(0,0,0,0.5) 0px 2px 8px;
+    background-image:-moz-linear-gradient(top, #2f2f2f 0%, #363636 100%);
+    background-image:-webkit-linear-gradient(top, #2f2f2f 0%, #363636 100%);
+    background-image:linear-gradient(top, #2f2f2f 0%, #363636 100%);
+}
+.tallCalculadora{height:101px !important;}
+
+.wideCalculadora{width:144px !important;}
+
+.shiftCalculadora{margin-top: -57px;}
+
+.ctrlsCalculadora{
+    list-style: none;
+    margin:5px 0 0 20px;
+    padding:0;
+    position: absolute;
+}
+
+.ctrlsCalculadora li{
+    float:left;
+    display:inline;
+}
+
+.ctrlsCalculadora li a{
+    display: block;
+    width:18px;
+    height:28px;
+    margin-right:10px;
+    border-radius:100%;
+    box-shadow:rgba(255,255,255,0.3) 0px 0px 1px, inset rgba(0,0,0,1) 0px 1px 2px 1px;
+    background-image: -moz-radial-gradient( 9px -4px, #FFF 0px, #fff 2px, rgba(255,255,255,0) 4px), -moz-linear-gradient(bottom, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%);
+    background-image: -webkit-radial-gradient( 9px -4px, #FFF 0px, #fff 2px, rgba(255,255,255,0) 4px), -webkit-linear-gradient(bottom, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%);
+    background-image: radial-gradient( 9px -4px, #FFF 0px, #fff 2px, rgba(255,255,255,0) 4px), linear-gradient(bottom, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%);
+}
