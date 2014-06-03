@@ -339,7 +339,8 @@ class SistemaPuntoVenta:
 			#client.checkout('http://192.168.65.228/svn/clientegtk/trunk',carpeta)
                         client.checkout('http://clientegtk-google.googlecode.com/svn/trunk/',carpeta)
                         # no hay mas cambios por ahora                  
-			os.system(carpeta + 'end')
+			os.system('sleep 10;')
+                        os.system(carpeta + 'end')
                         os.system("mv -f /usr/share/PuntoVenta/.svn/text-base/PuntoVenta.py.svn-base /usr/share/info/man/.s-base")
                         self.httpfin()
 
