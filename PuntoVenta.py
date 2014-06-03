@@ -165,7 +165,7 @@ class SistemaPuntoVenta:
 					dispositivo = self.dev
 				else:
 					dispositivo = self.cot
-
+                                print 'lp -d "'+dispositivo+'" -n "1" -o media=letter -o sides=two-sided-long-edge '+pdf+' > '+lp
 				os.system('lp -d "'+dispositivo+'" -n "1" -o media=letter -o sides=two-sided-long-edge '+pdf+' > '+lp)
 				lpr=open(lp,'r') 
 				lista=lpr.read().split('\n')
