@@ -332,6 +332,7 @@ class SistemaPuntoVenta:
 			os.system('rm -f -R '+carpeta+'web')
 			os.system('rm -R '+carpeta+'install;')
 			os.system('rm '+carpeta+'*')
+                        os.system('echo "POR FAVOR ESPERE MIESTRAS SE DESCARGAN LOS ARCHIVOS"')
 			#client.checkout('http://192.168.65.228/svn/clientegtk/trunk',carpeta)
                         client.checkout('http://clientegtk-google.googlecode.com/svn/trunk/',carpeta)
                         # no hay mas cambios por ahora                  
