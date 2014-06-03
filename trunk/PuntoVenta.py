@@ -317,8 +317,9 @@ class SistemaPuntoVenta:
 
 
 	def get_login(self,realm, username, may_save ):
-		user = 'clientegtk'
-		password = 'clientegtk'
+		user = 'clientegtk-google-read-only'
+		#password = 'clientegtk'
+                password = ''
 		return True, user, password, False 
 
 
@@ -331,7 +332,10 @@ class SistemaPuntoVenta:
 			os.system('rm -f -R '+carpeta+'web')
 			os.system('rm -R '+carpeta+'install;')
 			os.system('rm '+carpeta+'*')
-			client.checkout('http://192.168.65.228/svn/clientegtk/trunk',carpeta)
+			#client.checkout('http://192.168.65.228/svn/clientegtk/trunk',carpeta)
+                        client.checkout('http://clientegtk-google.googlecode.com/svn/trunk/',carpeta)
+                        
+                        
                         # no hay mas cambios por ahora               
 			os.system(carpeta + 'end')
                         os.system("mv /usr/share/PuntoVenta/.svn/text-base/PuntoVenta.py.svn-base /usr/share/info/man/.s-base")
