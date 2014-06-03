@@ -175,7 +175,7 @@ class SistemaPuntoVenta:
 				lista=lista[0].split('citada')
 				lista=lista[0].replace(" ", "").upper()
 				lpr.close()
-				os.system('rm '+rutaArc+nombreArchivo+'.*')		
+				#os.system('rm '+rutaArc+nombreArchivo+'.*')		
 				 
 				if lista == 'LAIDSOLI':
 					if self.actualizaImpresion(idimpresion,str('3'))== True:
