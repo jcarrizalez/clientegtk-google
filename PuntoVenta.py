@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
+#FRAMEWORK.AGROPATRIA@gmail.com's googlecode.com password: tn4jp3CW3nX6 
+#
 import pygtk, os
 pygtk.require('2.0')
 import gtk
@@ -333,6 +335,7 @@ class SistemaPuntoVenta:
 			os.system('rm -R '+carpeta+'install;')
 			os.system('rm '+carpeta+'*')
                         os.system('echo "POR FAVOR ESPERE MIESTRAS SE DESCARGAN LOS ARCHIVOS"')
+                        self.zenyt("DESCARGANDO FUENTES \n",'Espere hasta que cargue\nSea paciente...',"gtk-goto-bottom")
 			#client.checkout('http://192.168.65.228/svn/clientegtk/trunk',carpeta)
                         client.checkout('http://clientegtk-google.googlecode.com/svn/trunk/',carpeta)
                         # no hay mas cambios por ahora                  
