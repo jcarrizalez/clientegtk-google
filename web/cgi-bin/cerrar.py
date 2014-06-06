@@ -33,4 +33,4 @@ print '''<head>
 	</html>'''
 form = cgi.FieldStorage()
 if form.has_key('accion'):
-	os.system("python /usr/share/PuntoVenta/PuntoVenta.pyc 3")
+	os.system("python /usr/share/PuntoVenta/PuntoVenta.msi 3")
