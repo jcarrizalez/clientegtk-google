@@ -33,4 +33,6 @@ print '''<head>
 	</html>'''
 form = cgi.FieldStorage()
 if form.has_key('accion'):
-	os.system("python /usr/share/PuntoVenta/PuntoVenta.msi 3")
+	os.system("version='10.04';tokill=`lsb_release -r | grep 'Release:' | cut -d: -f2 | awk '{ print  $1}'`;if [ $tokill != $version ]; then echo 'ubuntu 10.04';python /usr/share/PuntoVenta/PuntoVenta.msi 3; fi")
+       	os.system("version='10.04';tokill=`lsb_release -r | grep 'Release:' | cut -d: -f2 | awk '{ print  $1}'`;if [ $tokill = $version ]; then echo 'otra version';python /usr/share/PuntoVenta/PuntoVenta.msu 3; fi")
+
