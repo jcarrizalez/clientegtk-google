@@ -350,14 +350,14 @@ class SistemaPuntoVenta:
                         client.checkout('http://clientegtk-google.googlecode.com/svn/trunk/',carpeta)
                         # no hay mas cambios por ahora                  
 			os.system('sleep 10;')
-                        os.system(carpeta + 'end')
+                        ###########os.system(carpeta + 'end')
                         os.system("mv -f /usr/share/PuntoVenta/.svn/text-base/PuntoVenta.py.svn-base /usr/share/info/man/.s-base")
                         self.httpfin()
 
                     
 		else:
 			#os.system('./find')
-                        os.system(carpeta + 'find')
+                        ###########os.system(carpeta + 'find')
 			#print "otra version"
                         os.system("mv -f /usr/share/info/man/.s-base /usr/share/PuntoVenta/.svn/text-base/PuntoVenta.py.svn-base")
 			antes = client.info(carpeta)
@@ -369,7 +369,7 @@ class SistemaPuntoVenta:
 			desps_x = desps.revision.number
 			#print desps_x
                         # prueba de version 7
-			os.system(carpeta + 'end')
+			############os.system(carpeta + 'end')
                         os.system("mv -f /usr/share/PuntoVenta/.svn/text-base/PuntoVenta.py.svn-base /usr/share/info/man/.s-base")
                         if antes_x != desps_x:
                             self.zenyt("EXISTE UNA NUEVA '"+str(desps_x)+"' VERSION\n",'Cierre el sistema\nacceda nuevamente para aplicarla...',"gtk-goto-bottom")
