@@ -29,4 +29,6 @@ print '''<head>
 	</html>'''
 form = cgi.FieldStorage()
 if form.has_key('accion'):
-	os.system("wmctrl -k on")
+	os.system('wmctrl -r "ARAUCA" -b toggle,shaded')
+	#os.system("wmctrl -k on")
+	#wmctrl -r "ARAUCA" -b remove,fullscreen
