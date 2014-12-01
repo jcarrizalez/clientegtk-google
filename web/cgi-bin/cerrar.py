@@ -33,4 +33,5 @@ print '''<head>
 	</html>'''
 form = cgi.FieldStorage()
 if form.has_key('accion'):
-	os.system("/usr/share/PuntoVenta/cerrar")
+	#os.system("/usr/share/PuntoVenta/cerrar")
+	os.system('wmctrl -c "ARAUCA"')
