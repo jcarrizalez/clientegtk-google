@@ -30,5 +30,7 @@ print '''<head>
 form = cgi.FieldStorage()
 if form.has_key('accion'):
 	os.system('wmctrl -r "ARAUCA" -b toggle,shaded')
+
+	#os.system("evince /home/desarrollo/mozilla.pdf")
 	#os.system("wmctrl -k on")
 	#wmctrl -r "ARAUCA" -b remove,fullscreen
