@@ -33,5 +33,8 @@ print '''<head>
 	</html>'''
 form = cgi.FieldStorage()
 if form.has_key('accion'):
-	#os.system("/usr/share/PuntoVenta/cerrar")
-	os.system('wmctrl -c "ARAUCA"')
+	os.system("/usr/share/PuntoVenta/cerrar")
+	#os.system("tokill=`ps -fea|grep PuntoVenta.pyc|awk '{ printf $2\" \"}'` & kill -9 $tokill;tokill=`ps -fea|grep CGIHTTPServer|awk '{ printf $2\" \"}'`; kill -9 $tokill & wmctrl -F -c 'ARAUCA'")
+	#os.system("evince /home/desarrollo/mozilla.pdf")
+
+
