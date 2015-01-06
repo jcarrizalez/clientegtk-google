@@ -11,7 +11,5 @@ print
 
 form = cgi.FieldStorage()
 if form.has_key('accion'):
-	os.system('wmctrl -r ".ARAUCA." -b toggle,shaded')
-	os.system('xdotool search --name ".ARAUCA." windowminimize')
-	#os.system("wmctrl -k on")
-	#wmctrl -r ".ARAUCA." -b remove,fullscreen
+	os.system('wmctrl -r ".ARAUCA." -b toggle,shaded 2> /tmp/log_arauca')
+	os.system('xdotool search --name ".ARAUCA." windowminimize 2> /tmp/log_arauca')
