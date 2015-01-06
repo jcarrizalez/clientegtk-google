@@ -24,11 +24,11 @@ for i in $MINUTO_
 do
 	if [ "$MINUTO" == "$i" ]; then
 		chmod 777 -R /tmp/;
-		chmod 777 -R /usr/share/PuntoVenta/;
-		chown root.root /usr/share/PuntoVenta/web/cgi-bin/lector;
-		chmod +s /usr/share/PuntoVenta/web/cgi-bin/lector;
-			break;
+		break;
 	fi
 done
+chmod 777 -R /usr/share/PuntoVenta/;
+chown root.root /usr/share/PuntoVenta/web/cgi-bin/lector;
+chmod +s /usr/share/PuntoVenta/web/cgi-bin/lector;
 ####################
 exit 0;
