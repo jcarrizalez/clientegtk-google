@@ -70,13 +70,14 @@ elif accion == "imprimir":
 		impresora = report
 
 	if impresora != "NO USAR":
-		#comando="wget -O "+archivo+" "+cert+"192.168.98.75:2002"+"/Navegador/imprimir?valores=tienda_-_"+tienda+"_._clave_-_"+clavep+"_._ip_-_"+ip+"_._id_-_"+id_+";evince "+archivo;
-		comando="wget -O "+archivo+" "+cert+ruta+"/Navegador/imprimir?valores=tienda_-_"+tienda+"_._clave_-_"+clavep+"_._ip_-_"+ip+"_._id_-_"+id_+";evince "+archivo;
+		comando="wget -O "+archivo+" "+cert+"192.168.98.75:2002"+"/Navegador/imprimir?valores=tienda_-_"+tienda+"_._clave_-_"+clavep+"_._ip_-_"+ip+"_._id_-_"+id_+";evince "+archivo;
+		#comando="wget -O "+archivo+" "+cert+ruta+"/Navegador/imprimir?valores=tienda_-_"+tienda+"_._clave_-_"+clavep+"_._ip_-_"+ip+"_._id_-_"+id_
 		lpr="lp -d "+impresora+' -n "1" -o media=letter -o sides=two-sided-long-edge '+archivo+" > "+salida
 		os.system(lpr);
-		lectura="cat "+salida+" | grep 'la id solicitada' | wc -l > "+salida+";rm -f "+salida
+		lectura="cat "+salida+" | grep 'la id solicitada' | wc -l > "+salida+"2;rm -f "+salida
+		os.system(lectura);
 		f=open(salida+"2",'r')
-		os.system(salida+"2");
+		os.system("rm -f "+salida+"2");
 		t=f.read()
 		f.close()
 		print t
