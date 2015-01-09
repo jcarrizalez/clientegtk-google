@@ -12,8 +12,6 @@ print
 form = cgi.FieldStorage()
 
 accion=form["accion"].value# impresoras , imprimir
-
-
 f=open("/usr/share/PuntoVenta/.CONFIG_PUNTO.EXE",'r')
 texto=f.read() 
 a=texto.split('\n')
@@ -70,8 +68,7 @@ elif accion == "imprimir":
 		impresora = report
 
 	if impresora != "NO USAR":
-		comando="wget -O "+archivo+" "+cert+"192.168.98.75:2002"+"/Navegador/imprimir?valores=tienda_-_"+tienda+"_._clave_-_"+clavep+"_._ip_-_"+ip+"_._id_-_"+id_+";evince "+archivo;
-		#comando="wget -O "+archivo+" "+cert+ruta+"/Navegador/imprimir?valores=tienda_-_"+tienda+"_._clave_-_"+clavep+"_._ip_-_"+ip+"_._id_-_"+id_
+		comando="wget -O "+archivo+" "+cert+ruta+"/Navegador/imprimir?valores=tienda_-_"+tienda+"_._clave_-_"+clavep+"_._ip_-_"+ip+"_._id_-_"+id_
 		lpr="lp -d "+impresora+' -n "1" -o media=letter -o sides=two-sided-long-edge '+archivo+" > "+salida
 		os.system(lpr);
 		lectura="cat "+salida+" | grep 'la id solicitada' | wc -l > "+salida+"2;rm -f "+salida
@@ -88,5 +85,10 @@ elif accion == "imprimir":
 0 no imprimio
 1 exito enviado a la impresora
 2 impresora no configurada
+
+
+wget --post-data "author=$autor&amp;email=$mail&amp;url=$url&amp;comment=$coment&amp;comment_parent=0&amp;submit=\"Publicar comentario\"&amp;comment_post_ID=$postid" $pagina/wp-comments-post.php
+
+
 '''
 
