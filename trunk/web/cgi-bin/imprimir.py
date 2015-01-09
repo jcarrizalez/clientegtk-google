@@ -78,30 +78,30 @@ elif accion == "verificar":
 
 
 	if cadena.find("guardado") >= 0:
-		cade="Listo"
+		cade="Estado: Listo"
 	elif cadena.find("100%") >= 0:
-		cade="Listo"
+		cade="Estado: Listo"
 	elif t.find("Grabando a:") >= 0:	
-		cade="Descangando"
+		cade="Estado: Descargando"
 	elif t.find("esperando respuesta") >= 0:
-		cade="Esperando Respuesta"
+		cade="Estado: Esperando Respuesta"
 	elif t.find("Conectando con") >= 0:		
-		cade="Conectando"
+		cade="Estado: Conectando"
 	elif t.find("--  http") >= 0:		
-		cade="Conectando"
+		cade="Estado: Conectando"
 	print cade
 
 	if t.find("Grabando a:") >= 0:	
-		cade="total= "+cadena
+		cade="Total: "+cadena
 		if cade.find("guardado") >= 0:
-			cade="total= 100%"	
+			cade="Total: 100%"	
 		
 		
 	else:
-		cade="total= 0%"		
+		cade="Total: 0%"		
 
-	if cade=="total= ":
-		cade="total= 0%"
+	if cade=="Total: ":
+		cade="Total: 0%"
 	print cade
 	
 	
@@ -113,9 +113,10 @@ elif accion == "verificar":
 		if cade !="Peso: no especificado ":
 			cade="Peso: "+t.split('Longitud:')[1].split('[')[0].split('(')[1].split(')')[0]
 	else:
-		cade="Peso: calculando.."
+		cade="Peso: Calculando.."
 	print cade	
 	
+
 
 elif accion == "imprimir":
 	id_=form["id"].value
@@ -139,13 +140,15 @@ elif accion == "imprimir":
 	if impresora != "NO USAR":
 		lpr="lp -d "+impresora+' -n "1" -o media=letter -o sides=two-sided-long-edge '+archivo+" > "+salida
 		os.system(lpr)
+		print lpr
 		lectura="cat "+salida+" | grep 'la id solicitada' | wc -l > "+salida+"2;rm -f "+salida
 		os.system(lectura)
 		f=open(salida+"2",'r')
-		os.system("rm -f "+salida+"2")
+		os.system("rm -f "+salida+"2;rm -f "+salida+";rm -f /tmp/salida_descarga;")
 		t=f.read()
 		f.close()
 		print t
+		os.system("evince "+archivo)
 	else:
 		print 2
 
