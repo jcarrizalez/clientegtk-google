@@ -47,13 +47,82 @@ if accion == "impresoras":
 	print "nota_debito="+ntodeb
 	print "nota_credito="+ntocre
 	print "reporte="+report
+	
+elif accion == "descargar":
+	id_=form["id"].value
+	tipo=form["tipo"].value
+	nombre=form["nombre"].value
+	archivo="/tmp/"+nombre+".pdf"
+	salida="/tmp/salida_descarga"
+	comando="echo '' > "+salida+";wget -o "+salida+" -O "+archivo+" "+cert+ruta+"/Navegador/imprimir?valores=tienda_-_"+tienda+"_._clave_-_"+clavep+"_._ip_-_"+ip+"_._id_-_"+id_
+	
+	#comando="echo '' > /tmp/salida_descarga;wget -o /tmp/salida_descarga -O /tmp/FAC-001000000000000000128.pdf http://w3.id.tue.nl/fileadmin/id/objects/E-Atelier/Phidgets/Software/Flash/fl8_tutorials.pdf &"
+
+	#comando="echo '' > /tmp/salida_descarga;wget -o /tmp/salida_descarga -O /tmp/FAC-001000000000000000128.pdf https://forja.rediris.es/docman/view.php/312/.../Postgres-Programmer.pdf &"
+	os.system(comando)
+	print 1
+	
+	
+elif accion == "verificar":
+	salida="/tmp/salida_descarga"
+	f=open(salida,'r')
+	t=f.read() 
+	a=t.split('\n')
+	f.close() 
+
+	f=file(salida,"r")
+	l=f.readlines()
+	f.close()
+	cadena=l[-2][62:-1]
+
+
+
+	if cadena.find("guardado") >= 0:
+		cade="Listo"
+	elif cadena.find("100%") >= 0:
+		cade="Listo"
+	elif t.find("Grabando a:") >= 0:	
+		cade="Descangando"
+	elif t.find("esperando respuesta") >= 0:
+		cade="Esperando Respuesta"
+	elif t.find("Conectando con") >= 0:		
+		cade="Conectando"
+	elif t.find("--  http") >= 0:		
+		cade="Conectando"
+	print cade
+
+	if t.find("Grabando a:") >= 0:	
+		cade="total= "+cadena
+		if cade.find("guardado") >= 0:
+			cade="total= 100%"	
+		
+		
+	else:
+		cade="total= 0%"		
+
+	if cade=="total= ":
+		cade="total= 0%"
+	print cade
+	
+	
+	
+	
+
+	if t.find("Longitud:") >= 0:
+		cade="Peso:"+t.split('Longitud:')[1].split('[')[0]
+		if cade !="Peso: no especificado ":
+			cade="Peso: "+t.split('Longitud:')[1].split('[')[0].split('(')[1].split(')')[0]
+	else:
+		cade="Peso: calculando.."
+	print cade	
+	
+
 elif accion == "imprimir":
 	id_=form["id"].value
 	tipo=form["tipo"].value
 	nombre=form["nombre"].value
 	archivo="/tmp/"+nombre+".pdf"
 	salida="/tmp/salida_impresora"
-
 	if tipo == "FAC":
 		impresora = factur
 	elif tipo == "COT":
@@ -68,13 +137,12 @@ elif accion == "imprimir":
 		impresora = report
 
 	if impresora != "NO USAR":
-		comando="wget -O "+archivo+" "+cert+ruta+"/Navegador/imprimir?valores=tienda_-_"+tienda+"_._clave_-_"+clavep+"_._ip_-_"+ip+"_._id_-_"+id_
 		lpr="lp -d "+impresora+' -n "1" -o media=letter -o sides=two-sided-long-edge '+archivo+" > "+salida
-		os.system(lpr);
+		os.system(lpr)
 		lectura="cat "+salida+" | grep 'la id solicitada' | wc -l > "+salida+"2;rm -f "+salida
-		os.system(lectura);
+		os.system(lectura)
 		f=open(salida+"2",'r')
-		os.system("rm -f "+salida+"2");
+		os.system("rm -f "+salida+"2")
 		t=f.read()
 		f.close()
 		print t
