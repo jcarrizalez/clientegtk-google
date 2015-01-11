@@ -40,6 +40,8 @@ if certif == "si":
 else:
 	cert="http://"	
 
+
+
 if accion == "impresoras":
 	print "cotizacion="+cotiza
 	print "facturacion="+factur
@@ -47,6 +49,64 @@ if accion == "impresoras":
 	print "nota_debito="+ntodeb
 	print "nota_credito="+ntocre
 	print "reporte="+report
+
+#elif accion == "estatus":
+elif accion == "estatus":
+	salida="/tmp/salida_impresora"
+	f=open(salida,'r')
+	t=f.read()
+	t=t.split('\n')[0]
+	a=t.split(' (')[0].replace('la id solicitada es ','')
+	f.close()
+	cola="lpstat -t | grep '"+a+"' > "+salida+"2"
+	os.system(cola)
+	f=open(salida+"2",'r')
+	cola=f.read()
+	cola=cola.split('\n')[0]
+	f.close()
+	impreso="lpstat -W completed | grep '"+a+"' |  wc -l > "+salida+"2"
+	os.system(impreso)
+	f=open(salida+"2",'r')
+	impreso=f.read() 
+	impreso=impreso.split('\n')[0]
+	f.close()
+	noimpreso="lpstat -W not-completed  | grep '"+a+"' |  wc -l > "+salida+"2"
+	os.system(noimpreso)
+	f=open(salida+"2",'r')
+	noimpreso=f.read()
+	noimpreso=noimpreso.split('\n')[0]
+	f.close()
+	if cola.find("imprimiendo "+a) >= 0:
+		print "imprimiendo"
+	elif cola.find(a) >= 0:
+		print "en_cola_de_impresion"
+	elif impreso =="1":
+		print "impreso"
+	elif noimpreso =="1":
+		print "no_impreso"
+	else:
+		print "error_de_impresion"
+
+	'''
+	rm -f /home/desarrollo/PDF/*;
+	echo ''> /tmp/salida_impresora;
+	echo '' > /tmp/salida_impresora2;
+	cp /tmp/FAC-001000000000000000128.pdf /tmp/FAC-001000000000000000129.pdf;
+	cp /tmp/FAC-001000000000000000128.pdf /tmp/FAC-001000000000000000127.pdf;
+	cp /tmp/FAC-001000000000000000128.pdf /tmp/FAC-001000000000000000126.pdf;
+	cp /tmp/FAC-001000000000000000128.pdf /tmp/FAC-001000000000000000125.pdf;
+	cp /tmp/FAC-001000000000000000128.pdf /tmp/FAC-001000000000000000124.pdf;
+	lp -d PDF -n "1" -o media=letter -o sides=two-sided-long-edge /tmp/FAC-001000000000000000128.pdf > /tmp/salida_impresora;
+	lp -d PDF -n "1" -o media=letter -o sides=two-sided-long-edge /tmp/FAC-001000000000000000129.pdf > /tmp/salida_impresora;
+	lp -d PDF -n "1" -o media=letter -o sides=two-sided-long-edge /tmp/FAC-001000000000000000127.pdf > /tmp/salida_impresora;
+	lp -d PDF -n "1" -o media=letter -o sides=two-sided-long-edge /tmp/FAC-001000000000000000126.pdf > /tmp/salida_impresora;
+	lp -d PDF -n "1" -o media=letter -o sides=two-sided-long-edge /tmp/FAC-001000000000000000125.pdf > /tmp/salida_impresora;
+	lp -d PDF -n "1" -o media=letter -o sides=two-sided-long-edge /tmp/FAC-001000000000000000124.pdf > /tmp/salida_impresora;
+	echo 'listo';
+
+	'''
+
+
 	
 elif accion == "descargar":
 	id_=form["id"].value
@@ -138,17 +198,17 @@ elif accion == "imprimir":
 		impresora = report
 
 	if impresora != "NO USAR":
-		lpr="lp -d "+impresora+' -n "1" -o media=letter -o sides=two-sided-long-edge '+archivo+" > "+salida
+		lpr="echo '' > "+salida+"2;echo '' > "+salida+";lp -d "+impresora+' -n "1" -o media=letter -o sides=two-sided-long-edge '+archivo+" > "+salida
 		os.system(lpr)
-		print lpr
-		lectura="cat "+salida+" | grep 'la id solicitada' | wc -l > "+salida+"2;rm -f "+salida
+		#print lpr
+		lectura="cat "+salida+" | grep 'la id solicitada' | wc -l > "+salida+"2;"
 		os.system(lectura)
 		f=open(salida+"2",'r')
-		os.system("rm -f "+salida+"2;rm -f "+salida+";rm -f /tmp/salida_descarga;")
+		#os.system("rm -f "+salida+"2;rm -f "+salida+";rm -f /tmp/salida_descarga;")
 		t=f.read()
 		f.close()
 		print t
-		os.system("evince "+archivo)
+		#os.system("evince "+archivo)
 	else:
 		print 2
 
@@ -156,7 +216,6 @@ elif accion == "imprimir":
 0 no imprimio
 1 exito enviado a la impresora
 2 impresora no configurada
-
 
 wget --post-data "author=$autor&amp;email=$mail&amp;url=$url&amp;comment=$coment&amp;comment_parent=0&amp;submit=\"Publicar comentario\"&amp;comment_post_ID=$postid" $pagina/wp-comments-post.php
 
