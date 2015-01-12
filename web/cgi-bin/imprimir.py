@@ -33,7 +33,7 @@ report=a[8].split('=')[1].split('|')[0]
 if dominio != "":
 	ruta=dominio
 else:
-	ruta=connex+puerto
+	ruta=connex+":"+puerto
 
 if certif == "si":
 	cert="https://"
