@@ -90,35 +90,54 @@ elif accion == "estatus":
 		t=t.split('\n')[0]
 		a=t.split(' (')[0].replace('la id solicitada es ','')
 		f.close()
-		cola="lpstat -o -p '"+impresora+"' | grep '"+a+"' > "+salida+"2"
-		# lpstat -o -p 'PDF_Printer'| grep -v 'activ' | wc -l > /tmp/salida_impresora3
+		cola="lpstat -o -p '"+impresora+"' | grep '"+a+"' | wc -l > "+salida+"2"
+		# lpstat -o -p 'PDF_Printer'| grep -v 'activ' | wc -l > /tmp/salida_impresora3  
 		os.system(cola)
 		f=open(salida+"2",'r')
 		cola=f.read()
 		cola=cola.split('\n')[0]
 		f.close()
-		impreso="lpstat -W completed -p '"+impresora+"' | grep '"+a+"' |  wc -l > "+salida+"2"
-		os.system(impreso)
-		f=open(salida+"2",'r')
-		impreso=f.read() 
-		impreso=impreso.split('\n')[0]
-		f.close()
-		noimpreso="lpstat -W not-completed -p '"+impresora+"'  | grep '"+a+"' |  wc -l > "+salida+"2"
-		os.system(noimpreso)
-		f=open(salida+"2",'r')
-		noimpreso=f.read()
-		noimpreso=noimpreso.split('\n')[0]
-		f.close()
-		if cola.find("imprimiendo "+a) >= 0:
-			print "0"#imprimiendo
-		elif cola.find(a) >= 0:
-			print "1"#en_cola_de_impresion
-		elif impreso =="1":
-			print "2"#impreso
-		elif noimpreso =="1":
-			print "3"#no_impreso
+		
+		if cola.find("0") >= 0:	
+			print "2"#error_de_impresion			
 		else:
-			print "4"#error_de_impresion
+		
+			cola="lpstat -o -p '"+impresora+"' | grep '"+a+"' > "+salida+"2"
+			# lpstat -o -p 'PDF_Printer'| grep -v 'activ' | wc -l > /tmp/salida_impresora3   | wc -l > 
+			print cola
+			os.system(cola)
+		
+			f=open(salida+"2",'r')
+			cola=f.read()
+			cola=cola.split('\n')[0]
+			f.close()
+		
+			
+			impreso="lpstat -W completed -p '"+impresora+"' | grep '"+a+"' |  wc -l > "+salida+"2"
+			os.system(impreso)
+			f=open(salida+"2",'r')
+			impreso=f.read() 
+			impreso=impreso.split('\n')[0]
+			f.close()
+			noimpreso="lpstat -W not-completed -p '"+impresora+"'  | grep '"+a+"' |  wc -l > "+salida+"2"
+			os.system(noimpreso)
+			f=open(salida+"2",'r')
+			noimpreso=f.read()
+			noimpreso=noimpreso.split('\n')[0]
+			f.close()
+			if cola.find("imprimiendo "+a) >= 0:
+				print "0"#imprimiendo
+			elif cola.find(a) >= 0:
+				print "1"#en_cola_de_impresion
+			elif impreso =="1":
+				print "2"#impreso
+			elif noimpreso =="1":
+				print "3"#no_impreso
+			else:
+				print "4"#error_de_impresion
+			
+
+			
 
 		
 		
