@@ -41,7 +41,6 @@ else:
 	cert="http://"	
 
 
-
 if accion == "impresoras":
 	print "cotizacion="+cotiza
 	print "facturacion="+factur
@@ -49,6 +48,7 @@ if accion == "impresoras":
 	print "nota_debito="+ntodeb
 	print "nota_credito="+ntocre
 	print "reporte="+report
+
 
 #elif accion == "estatus":
 elif accion == "estatus":
