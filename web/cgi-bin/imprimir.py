@@ -80,7 +80,7 @@ elif accion == "estatus":
 			f.close()
 			print cola
 		else:
-			print "-1"	
+		 print "-1"	
 		
 		
 	else:
@@ -91,7 +91,6 @@ elif accion == "estatus":
 		a=t.split(' (')[0].replace('la id solicitada es ','')
 		f.close()
 		cola="lpstat -o -p '"+impresora+"' | grep '"+a+"' > "+salida+"2"
-		print cola
 		# lpstat -o -p 'PDF_Printer'| grep -v 'activ' | wc -l > /tmp/salida_impresora3
 		os.system(cola)
 		f=open(salida+"2",'r')
@@ -111,15 +110,15 @@ elif accion == "estatus":
 		noimpreso=noimpreso.split('\n')[0]
 		f.close()
 		if cola.find("imprimiendo "+a) >= 0:
-			print "imprimiendo"
+			print "0"#imprimiendo
 		elif cola.find(a) >= 0:
-			print "en_cola_de_impresion"
+			print "1"#en_cola_de_impresion
 		elif impreso =="1":
-			print "impreso"
+			print "2"#impreso
 		elif noimpreso =="1":
-			print "no_impreso"
+			print "3"#no_impreso
 		else:
-			print "error_de_impresion"
+			print "4"#error_de_impresion
 
 		
 		
