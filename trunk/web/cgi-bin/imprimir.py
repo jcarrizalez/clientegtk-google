@@ -50,63 +50,96 @@ if accion == "impresoras":
 	print "reporte="+report
 
 
-#elif accion == "estatus":
+
 elif accion == "estatus":
 	salida="/tmp/salida_impresora"
-	f=open(salida,'r')
-	t=f.read()
-	t=t.split('\n')[0]
-	a=t.split(' (')[0].replace('la id solicitada es ','')
-	f.close()
-	cola="lpstat -t | grep '"+a+"' > "+salida+"2"
-	os.system(cola)
-	f=open(salida+"2",'r')
-	cola=f.read()
-	cola=cola.split('\n')[0]
-	f.close()
-	impreso="lpstat -W completed | grep '"+a+"' |  wc -l > "+salida+"2"
-	os.system(impreso)
-	f=open(salida+"2",'r')
-	impreso=f.read() 
-	impreso=impreso.split('\n')[0]
-	f.close()
-	noimpreso="lpstat -W not-completed  | grep '"+a+"' |  wc -l > "+salida+"2"
-	os.system(noimpreso)
-	f=open(salida+"2",'r')
-	noimpreso=f.read()
-	noimpreso=noimpreso.split('\n')[0]
-	f.close()
-	if cola.find("imprimiendo "+a) >= 0:
-		print "imprimiendo"
-	elif cola.find(a) >= 0:
-		print "en_cola_de_impresion"
-	elif impreso =="1":
-		print "impreso"
-	elif noimpreso =="1":
-		print "no_impreso"
+	tipo=form["tipo"].value
+	nombre=form["nombre"].value
+	archivo="/tmp/"+nombre+".pdf"
+	if tipo == "FAC":
+		impresora = factur
+	elif tipo == "COT":
+		impresora = cotiza
+	elif tipo == "DEV":
+		impresora = devolu
+	elif tipo == "NCR":
+		impresora = ntocre
+	elif tipo == "NDB":
+		impresora = ntodeb  
 	else:
-		print "error_de_impresion"
+		impresora = report
+	
+	if nombre == "todo":
+		if impresora != "NO USAR":	
+			cola="lpstat -o -p '"+impresora+"'| grep -v 'activ' | wc -l > "+salida+"3"
+			os.system(cola)
+			f=open(salida+"3",'r')
+			os.system("rm -f "+salida+"3")
+			cola=f.read()
+			cola=cola.split('\n')[0]
+			f.close()
+			print cola
+		else:
+			print "-1"	
+		
+		
+	else:
 
-	'''
-	rm -f /home/desarrollo/PDF/*;
-	echo ''> /tmp/salida_impresora;
-	echo '' > /tmp/salida_impresora2;
-	cp /tmp/FAC-001000000000000000128.pdf /tmp/FAC-001000000000000000129.pdf;
-	cp /tmp/FAC-001000000000000000128.pdf /tmp/FAC-001000000000000000127.pdf;
-	cp /tmp/FAC-001000000000000000128.pdf /tmp/FAC-001000000000000000126.pdf;
-	cp /tmp/FAC-001000000000000000128.pdf /tmp/FAC-001000000000000000125.pdf;
-	cp /tmp/FAC-001000000000000000128.pdf /tmp/FAC-001000000000000000124.pdf;
-	lp -d PDF -n "1" -o media=letter -o sides=two-sided-long-edge /tmp/FAC-001000000000000000128.pdf > /tmp/salida_impresora;
-	lp -d PDF -n "1" -o media=letter -o sides=two-sided-long-edge /tmp/FAC-001000000000000000129.pdf > /tmp/salida_impresora;
-	lp -d PDF -n "1" -o media=letter -o sides=two-sided-long-edge /tmp/FAC-001000000000000000127.pdf > /tmp/salida_impresora;
-	lp -d PDF -n "1" -o media=letter -o sides=two-sided-long-edge /tmp/FAC-001000000000000000126.pdf > /tmp/salida_impresora;
-	lp -d PDF -n "1" -o media=letter -o sides=two-sided-long-edge /tmp/FAC-001000000000000000125.pdf > /tmp/salida_impresora;
-	lp -d PDF -n "1" -o media=letter -o sides=two-sided-long-edge /tmp/FAC-001000000000000000124.pdf > /tmp/salida_impresora;
-	echo 'listo';
+		f=open(salida,'r')
+		t=f.read()
+		t=t.split('\n')[0]
+		a=t.split(' (')[0].replace('la id solicitada es ','')
+		f.close()
+		cola="lpstat -o -p '"+impresora+"' | grep '"+a+"' > "+salida+"2"
+		print cola
+		# lpstat -o -p 'PDF_Printer'| grep -v 'activ' | wc -l > /tmp/salida_impresora3
+		os.system(cola)
+		f=open(salida+"2",'r')
+		cola=f.read()
+		cola=cola.split('\n')[0]
+		f.close()
+		impreso="lpstat -W completed -p '"+impresora+"' | grep '"+a+"' |  wc -l > "+salida+"2"
+		os.system(impreso)
+		f=open(salida+"2",'r')
+		impreso=f.read() 
+		impreso=impreso.split('\n')[0]
+		f.close()
+		noimpreso="lpstat -W not-completed -p '"+impresora+"'  | grep '"+a+"' |  wc -l > "+salida+"2"
+		os.system(noimpreso)
+		f=open(salida+"2",'r')
+		noimpreso=f.read()
+		noimpreso=noimpreso.split('\n')[0]
+		f.close()
+		if cola.find("imprimiendo "+a) >= 0:
+			print "imprimiendo"
+		elif cola.find(a) >= 0:
+			print "en_cola_de_impresion"
+		elif impreso =="1":
+			print "impreso"
+		elif noimpreso =="1":
+			print "no_impreso"
+		else:
+			print "error_de_impresion"
 
-	'''
-
-
+		
+		
+		'''
+		rm -f /home/desarrollo/PDF/*;
+		echo ''> /tmp/salida_impresora;
+		echo '' > /tmp/salida_impresora2;
+		cp /tmp/FAC-001000000000000000128.pdf /tmp/FAC-001000000000000000129.pdf;
+		cp /tmp/FAC-001000000000000000128.pdf /tmp/FAC-001000000000000000127.pdf;
+		cp /tmp/FAC-001000000000000000128.pdf /tmp/FAC-001000000000000000126.pdf;
+		cp /tmp/FAC-001000000000000000128.pdf /tmp/FAC-001000000000000000125.pdf;
+		cp /tmp/FAC-001000000000000000128.pdf /tmp/FAC-001000000000000000124.pdf;
+		lp -d PDF_Printer -n "1" -o media=letter -o sides=two-sided-long-edge /tmp/FAC-001000000000000000128.pdf > /tmp/salida_impresora;
+		lp -d PDF_Printer -n "1" -o media=letter -o sides=two-sided-long-edge /tmp/FAC-001000000000000000129.pdf > /tmp/salida_impresora;
+		lp -d PDF_Printer -n "1" -o media=letter -o sides=two-sided-long-edge /tmp/FAC-001000000000000000127.pdf > /tmp/salida_impresora;
+		lp -d PDF_Printer -n "1" -o media=letter -o sides=two-sided-long-edge /tmp/FAC-001000000000000000126.pdf > /tmp/salida_impresora;
+		lp -d PDF_Printer -n "1" -o media=letter -o sides=two-sided-long-edge /tmp/FAC-001000000000000000125.pdf > /tmp/salida_impresora;
+		lp -d PDF_Printer -n "1" -o media=letter -o sides=two-sided-long-edge /tmp/FAC-001000000000000000124.pdf > /tmp/salida_impresora;
+		echo 'listo';
+		'''
 	
 elif accion == "descargar":
 	id_=form["id"].value
