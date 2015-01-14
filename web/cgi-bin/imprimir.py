@@ -104,7 +104,7 @@ elif accion == "estatus":
 		
 			cola="lpstat -o -p '"+impresora+"' | grep '"+a+"' > "+salida+"2"
 			# lpstat -o -p 'PDF_Printer'| grep -v 'activ' | wc -l > /tmp/salida_impresora3   | wc -l > 
-			print cola
+			#print cola
 			os.system(cola)
 		
 			f=open(salida+"2",'r')
