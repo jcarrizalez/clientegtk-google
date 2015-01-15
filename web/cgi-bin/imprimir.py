@@ -214,8 +214,6 @@ elif accion == "verificar":
 	if cade=="Total: ":
 		cade="Total: 0%"
 	print cade
-	os.system("sleep 1;")		
-	
 	
 	
 
@@ -226,7 +224,7 @@ elif accion == "verificar":
 	else:
 		cade="Peso: Calculando.."
 	print cade	
-	
+	os.system("sleep 1;")	
 
 
 elif accion == "imprimir":
