@@ -135,7 +135,7 @@ elif accion == "estatus":
 				print "3"#no_impreso
 			else:
 				print "4"#error_de_impresion
-			
+		os.system("sleep 1;")		
 
 			
 
@@ -214,7 +214,7 @@ elif accion == "verificar":
 	if cade=="Total: ":
 		cade="Total: 0%"
 	print cade
-	
+	os.system("sleep 1;")		
 	
 	
 	
