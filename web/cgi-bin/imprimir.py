@@ -71,7 +71,7 @@ elif accion == "estatus":
 	
 	if nombre == "todo":
 		if impresora != "NO USAR":	
-			cola="lpstat -o -p '"+impresora+"'| grep -v 'activ' | wc -l > "+salida+"3"
+			cola="lpstat -o -p '"+impresora+"'| grep -v 'activ' | grep -v 'failed' | wc -l > "+salida+"3"
 			os.system(cola)
 			f=open(salida+"3",'r')
 			os.system("rm -f "+salida+"3")
@@ -90,7 +90,7 @@ elif accion == "estatus":
 		t=t.split('\n')[0]
 		a=t.split(' (')[0].replace('la id solicitada es ','')
 		f.close()
-		cola="lpstat -o -p '"+impresora+"' | grep '"+a+"' | wc -l > "+salida+"2"
+		cola="lpstat -o -p '"+impresora+"' | grep '"+a+"' | grep -v 'failed' | wc -l > "+salida+"2"
 		# lpstat -o -p 'PDF_Printer'| grep -v 'activ' | wc -l > /tmp/salida_impresora3  
 		os.system(cola)
 		f=open(salida+"2",'r')
