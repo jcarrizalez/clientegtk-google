@@ -165,7 +165,22 @@ elif accion == "descargar":
 	nombre=form["nombre"].value
 	archivo="/tmp/"+nombre+".pdf"
 	salida="/tmp/salida_descarga"
-	comando="echo '' > "+salida+";wget -o "+salida+" -O "+archivo+" "+cert+ruta+"/Navegador/imprimir?valores=tienda_-_"+tienda+"_._clave_-_"+clavep+"_._ip_-_"+ip+"_._id_-_"+id_+"_._tipo_-_"+tipo
+
+				
+	if nombre == "Cierre_de_Caja":
+		fecha=form["fecha"].value
+		fecha=fecha.split(' ')[0]
+		idCaja=form["idCaja"].value
+		comando="echo '' > "+salida+";wget -o "+salida+" -O /tmp/Cierre_de_Caja.pdf http://192.168.98.75:50014/CierreCajas/pdf_punto/tienda_-_"+tienda+"_._clave_-_"+clavep+"_._ip_-_"+ip+"_._punto_-_"+idCaja+"_._desde_-_"+fecha+"_._hasta_-_"+fecha+"_._tipo_-_pdf"
+
+	elif nombre == "Libro_de_Venta":
+		fecha=form["fecha"].value
+		fecha=fecha.split(' ')[0]
+		idCaja=form["idCaja"].value
+		comando="echo '' > "+salida+";wget -o "+salida+" -O /tmp/Libro_de_Venta.xlsx http://192.168.98.75:50014/LibroVentas/reporte_excel_ind/desde_-_"+fecha+"_._hasta_-_"+fecha+"_._tienda_-_"+tienda+"_._tipo_-_1"
+	else:	
+		comando="echo '' > "+salida+";wget -o "+salida+" -O "+archivo+" "+cert+ruta+"/Navegador/imprimir?valores=tienda_-_"+tienda+"_._clave_-_"+clavep+"_._ip_-_"+ip+"_._id_-_"+id_+"_._tipo_-_"+tipo
+	
 	
 	#comando="echo '' > /tmp/salida_descarga;wget -o /tmp/salida_descarga -O /tmp/FAC-001000000000000000128.pdf http://w3.id.tue.nl/fileadmin/id/objects/E-Atelier/Phidgets/Software/Flash/fl8_tutorials.pdf &"
 
@@ -173,6 +188,25 @@ elif accion == "descargar":
 	os.system(comando)
 	print 1
 	
+
+
+
+
+elif accion == "visualizar":
+	id_=form["id"].value
+	tipo=form["tipo"].value
+	nombre=form["nombre"].value
+	imprimir=form["imprimir"].value	
+
+	if nombre == "Cierre_de_Caja":
+		#os.system("evince "+archivo)
+		os.system("evince "+'/tmp/Cierre_de_Caja.pdf')
+
+	elif nombre == "Libro_de_Venta":
+		os.system("soffice --calc "+'/tmp/Libro_de_Venta.xlsx')
+
+
+
 	
 elif accion == "verificar":
 	salida="/tmp/salida_descarga"
