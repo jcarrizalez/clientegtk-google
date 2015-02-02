@@ -25,7 +25,7 @@ usuario=form["usuario"].value
 clave=form["clave"].value
 puerto=form["puerto"].value
 
-ip = base64.b64encode('192.168.98.73')
+#ip = base64.b64encode('192.168.98.73')
 
 #print dato_id
 comando="/usr/share/PuntoVenta/web/cgi-bin/lector "+tipo+" "+accion+" "+dato_id+" "+tiempo+" "+sensibilidad+" "+seguridad+" "+posicion+" "+ip+" "+basedatos+" "+usuario+" "+clave+" "+puerto+" > aviso";

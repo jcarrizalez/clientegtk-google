@@ -160,6 +160,7 @@ elif accion == "estatus":
 		'''
 	
 elif accion == "descargar":
+	url=form["url"].value
 	id_=form["id"].value
 	tipo=form["tipo"].value
 	nombre=form["nombre"].value
@@ -178,7 +179,7 @@ elif accion == "descargar":
 		fich.close() 
 		os.system('rm -f /tmp/.spdf')	
 		if lista[0]=="0":
-			comando="echo '' > "+salida+";wget -o "+salida+" -O /tmp/Cierre_de_Caja.pdf http://192.168.98.75:50014/CierreCajas/pdf_punto/tienda_-_"+tienda+"_._clave_-_"+clavep+"_._ip_-_"+ip+"_._punto_-_"+idCaja+"_._desde_-_"+fecha+"_._hasta_-_"+fecha+"_._tipo_-_pdf"
+			comando="echo '' > "+salida+";wget -o "+salida+" -O /tmp/Cierre_de_Caja.pdf "+url+"/CierreCajas/pdf_punto/tienda_-_"+tienda+"_._clave_-_"+clavep+"_._ip_-_"+ip+"_._punto_-_"+idCaja+"_._desde_-_"+fecha+"_._hasta_-_"+fecha+"_._tipo_-_pdf"
 		else:
 			os.system("wmctrl -a 'Cierre_de_Caja.pdf';")
 					
@@ -197,7 +198,7 @@ elif accion == "descargar":
 		fich.close() 
 		os.system('rm -f /tmp/.sxlsx')	
 		if lista[0]=="0":
-			comando="echo '' > "+salida+";wget -o "+salida+" -O /tmp/Libro_de_Venta.xlsx http://192.168.98.75:50014/LibroVentas/reporte_excel_ind/desde_-_"+fecha+"_._hasta_-_"+fecha+"_._tienda_-_"+tienda+"_._tipo_-_1"
+			comando="echo '' > "+salida+";wget -o "+salida+" -O /tmp/Libro_de_Venta.xlsx "+url+"/LibroVentas/reporte_excel_ind/desde_-_"+fecha+"_._hasta_-_"+fecha+"_._tienda_-_"+tienda+"_._tipo_-_1"
 		else:
 			os.system("wmctrl -a 'Libro_de_Venta.xlsx';")
 		
