@@ -171,13 +171,36 @@ elif accion == "descargar":
 		fecha=form["fecha"].value
 		fecha=fecha.split(' ')[0]
 		idCaja=form["idCaja"].value
-		comando="echo '' > "+salida+";wget -o "+salida+" -O /tmp/Cierre_de_Caja.pdf http://192.168.98.75:50014/CierreCajas/pdf_punto/tienda_-_"+tienda+"_._clave_-_"+clavep+"_._ip_-_"+ip+"_._punto_-_"+idCaja+"_._desde_-_"+fecha+"_._hasta_-_"+fecha+"_._tipo_-_pdf"
+		os.system("wmctrl -l | grep 'Cierre_de_Caja.pdf' | wc -l > /tmp/.spdf")	
+		fich=open("/tmp/.spdf",'r')
+		texto=fich.read() 
+		lista=texto.split('\n')
+		fich.close() 
+		os.system('rm -f /tmp/.spdf')	
+		if lista[0]=="0":
+			comando="echo '' > "+salida+";wget -o "+salida+" -O /tmp/Cierre_de_Caja.pdf http://192.168.98.75:50014/CierreCajas/pdf_punto/tienda_-_"+tienda+"_._clave_-_"+clavep+"_._ip_-_"+ip+"_._punto_-_"+idCaja+"_._desde_-_"+fecha+"_._hasta_-_"+fecha+"_._tipo_-_pdf"
+		else:
+			os.system("wmctrl -a 'Cierre_de_Caja.pdf';")
+					
+		
+		
 
 	elif nombre == "Libro_de_Venta":
 		fecha=form["fecha"].value
 		fecha=fecha.split(' ')[0]
 		idCaja=form["idCaja"].value
-		comando="echo '' > "+salida+";wget -o "+salida+" -O /tmp/Libro_de_Venta.xlsx http://192.168.98.75:50014/LibroVentas/reporte_excel_ind/desde_-_"+fecha+"_._hasta_-_"+fecha+"_._tienda_-_"+tienda+"_._tipo_-_1"
+		
+		os.system("wmctrl -l | grep 'Libro_de_Venta.xlsx' | wc -l > /tmp/.sxlsx")	
+		fich=open("/tmp/.sxlsx",'r')
+		texto=fich.read() 
+		lista=texto.split('\n')
+		fich.close() 
+		os.system('rm -f /tmp/.sxlsx')	
+		if lista[0]=="0":
+			comando="echo '' > "+salida+";wget -o "+salida+" -O /tmp/Libro_de_Venta.xlsx http://192.168.98.75:50014/LibroVentas/reporte_excel_ind/desde_-_"+fecha+"_._hasta_-_"+fecha+"_._tienda_-_"+tienda+"_._tipo_-_1"
+		else:
+			os.system("wmctrl -a 'Libro_de_Venta.xlsx';")
+		
 	else:	
 		comando="echo '' > "+salida+";wget -o "+salida+" -O "+archivo+" "+cert+ruta+"/Navegador/imprimir?valores=tienda_-_"+tienda+"_._clave_-_"+clavep+"_._ip_-_"+ip+"_._id_-_"+id_+"_._tipo_-_"+tipo
 	
@@ -199,11 +222,29 @@ elif accion == "visualizar":
 	imprimir=form["imprimir"].value	
 
 	if nombre == "Cierre_de_Caja":
-		#os.system("evince "+archivo)
-		os.system("evince "+'/tmp/Cierre_de_Caja.pdf')
+		os.system("wmctrl -l | grep 'Cierre_de_Caja.pdf' | wc -l > /tmp/.spdf")	
+		fich=open("/tmp/.spdf",'r')
+		texto=fich.read() 
+		lista=texto.split('\n')
+		fich.close() 
+		os.system('rm -f /tmp/.spdf')	
+		if lista[0]=="0":
+			os.system("evince "+'/tmp/Cierre_de_Caja.pdf &')
+		else:
+			os.system("wmctrl -a 'Cierre_de_Caja.pdf';")
+
 
 	elif nombre == "Libro_de_Venta":
-		os.system("soffice --calc "+'/tmp/Libro_de_Venta.xlsx')
+		os.system("wmctrl -l | grep 'Libro_de_Venta.xlsx' | wc -l > /tmp/.sxlsx")	
+		fich=open("/tmp/.sxlsx",'r')
+		texto=fich.read() 
+		lista=texto.split('\n')
+		fich.close() 
+		os.system('rm -f /tmp/.sxlsx')	
+		if lista[0]=="0":
+			os.system("soffice --calc "+'/tmp/Libro_de_Venta.xlsx &')
+		else:
+			os.system("wmctrl -a 'Libro_de_Venta.xlsx';")
 
 
 
