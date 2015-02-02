@@ -2,7 +2,7 @@
 # -*- encoding: utf-8 -*-
 import os
 import cgi
-import base64
+#import base64
 print "Content-Type: text/html"
 print "Access-Control-Allow-Origin: *"
 print "Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept"
@@ -18,6 +18,7 @@ dato_id=form["dato_id"].value
 tiempo=form["tiempo"].value
 sensibilidad=form["sensibilidad"].value
 seguridad=form["seguridad"].value
+#seguridad="4"
 posicion=form["posicion"].value
 ip=form["ip"].value
 basedatos=form["basedatos"].value
