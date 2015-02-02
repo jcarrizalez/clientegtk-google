@@ -2,7 +2,7 @@
 # -*- encoding: utf-8 -*-
 import os
 import cgi
-
+import base64
 print "Content-Type: text/html"
 print "Access-Control-Allow-Origin: *"
 print "Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept"
@@ -25,10 +25,11 @@ usuario=form["usuario"].value
 clave=form["clave"].value
 puerto=form["puerto"].value
 
+ip = base64.b64encode('192.168.98.73')
 
+#print dato_id
 comando="/usr/share/PuntoVenta/web/cgi-bin/lector "+tipo+" "+accion+" "+dato_id+" "+tiempo+" "+sensibilidad+" "+seguridad+" "+posicion+" "+ip+" "+basedatos+" "+usuario+" "+clave+" "+puerto+" > aviso";
 
-#print comando
 os.system(comando);
 #os.system('/usr/share/PuntoVenta/web/cgi-bin/lector cliente verificar 15650075 2 7 4 1 192.168.98.74 biometrico admin j5d1j5 5432 > aviso');
 
