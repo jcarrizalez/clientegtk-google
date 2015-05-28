@@ -168,6 +168,8 @@ elif accion == "descargar":
 	#fecha=form["fecha"].value
 	#fecha=fecha.split(' ')[0]
 	if tipoDoc =="PDF":
+		tip_d="pdf"	
+	elif tipoDoc =="DOC":
 		tip_d="pdf"
 	else:
 		tip_d="xlsx"
@@ -183,7 +185,7 @@ elif accion == "descargar":
 	fich.close() 
 	os.system('rm -f /tmp/.s'+tip_d+'')	
 
-	if tipoDoc != "":
+	if tipoDoc != "DOC":
 		if lista[0]=="0":
 			comando="echo '' > "+salida+";wget -o "+salida+" -O /tmp/"+nombre+"."+tip_d+" "+url+"/"+variables
 		else:
@@ -206,6 +208,8 @@ elif accion == "visualizar":
 	tipoDoc=form["tipoDoc"].value
 	#imprimir=form["imprimir"].value
 	if tipoDoc =="PDF":
+		tip_d="pdf"
+	elif tipoDoc =="DOC":
 		tip_d="pdf"
 	else:
 		tip_d="xlsx"
@@ -308,7 +312,9 @@ elif accion == "imprimir":
 		t=f.read()
 		f.close()
 		print t
-		#os.system("evince "+archivo)
+		#print 1
+		
+		#os.system("evince "+archivo) echo '' > /tmp/salida_impresora2;echo '' > /tmp/salida_impresora;lp -d PDF -n "1" -o media=letter -o sides=two-sided-long-edge /tmp/FAC-008000000000000092921.pdf > /tmp/salida_impresora
 	else:
 		print 2
 
