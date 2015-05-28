@@ -137,10 +137,6 @@ elif accion == "estatus":
 				print "4"#error_de_impresion
 		os.system("sleep 1;")		
 
-			
-
-		
-		
 		'''
 		rm -f /home/desarrollo/PDF/*;
 		echo ''> /tmp/salida_impresora;
@@ -162,57 +158,43 @@ elif accion == "estatus":
 elif accion == "descargar":
 	url=form["url"].value
 	id_=form["id"].value
-	tipo=form["tipo"].value
+	tipo=form["tipo"].value#tipodeimpresora
 	nombre=form["nombre"].value
-	archivo="/tmp/"+nombre+".pdf"
 	salida="/tmp/salida_descarga"
+	#idCaja=form["idCaja"].value	
+	tipoDoc=form["tipoDoc"].value#siesPDFoCAL
+	filtros=form["filtros"].value
+	#fecha=form["fecha"].value
+	#fecha=fecha.split(' ')[0]
+	if tipoDoc =="PDF":
+		tip_d="pdf"
+	else:
+		tip_d="xlsx"
 
-				
-	if nombre == "Cierre_de_Caja":
-		fecha=form["fecha"].value
-		fecha=fecha.split(' ')[0]
-		idCaja=form["idCaja"].value
-		os.system("wmctrl -l | grep 'Cierre_de_Caja.pdf' | wc -l > /tmp/.spdf")	
-		fich=open("/tmp/.spdf",'r')
-		texto=fich.read() 
-		lista=texto.split('\n')
-		fich.close() 
-		os.system('rm -f /tmp/.spdf')	
-		if lista[0]=="0":
-			comando="echo '' > "+salida+";wget -o "+salida+" -O /tmp/Cierre_de_Caja.pdf "+url+"/CierreCajas/pdf_punto/tienda_-_"+tienda+"_._clave_-_"+clavep+"_._ip_-_"+ip+"_._punto_-_"+idCaja+"_._desde_-_"+fecha+"_._hasta_-_"+fecha+"_._tipo_-_pdf"
-		else:
-			os.system("wmctrl -a 'Cierre_de_Caja.pdf';")
-					
-		
-		
+	configuracion="tienda_-_"+tienda+"_._clave_-_"+clavep+"_._ip_-_"+ip+"_._tipo_-_"+tip_d
+	variables=configuracion+"_union_"+filtros
+	variables=variables.replace(' ','_esp_').replace(':','_dosp_')
+	archivo="/tmp/"+nombre+"."+tip_d
+	os.system("wmctrl -l | grep '"+nombre+"."+tip_d+"' | wc -l > /tmp/.s"+tip_d+"")	
+	fich=open("/tmp/.s"+tip_d+"",'r')
+	texto=fich.read() 
+	lista=texto.split('\n')
+	fich.close() 
+	os.system('rm -f /tmp/.s'+tip_d+'')	
 
-	elif nombre == "Libro_de_Venta":
-		fecha=form["fecha"].value
-		fecha=fecha.split(' ')[0]
-		idCaja=form["idCaja"].value
-		
-		os.system("wmctrl -l | grep 'Libro_de_Venta.xlsx' | wc -l > /tmp/.sxlsx")	
-		fich=open("/tmp/.sxlsx",'r')
-		texto=fich.read() 
-		lista=texto.split('\n')
-		fich.close() 
-		os.system('rm -f /tmp/.sxlsx')	
+	if tipoDoc != "":
 		if lista[0]=="0":
-			comando="echo '' > "+salida+";wget -o "+salida+" -O /tmp/Libro_de_Venta.xlsx "+url+"/LibroVentas/reporte_excel_ind/desde_-_"+fecha+"_._hasta_-_"+fecha+"_._tienda_-_"+tienda+"_._tipo_-_1"
+			comando="echo '' > "+salida+";wget -o "+salida+" -O /tmp/"+nombre+"."+tip_d+" "+url+"/"+variables
 		else:
-			os.system("wmctrl -a 'Libro_de_Venta.xlsx';")
-		
+			os.system("wmctrl -a '"+nombre+"."+tip_d+"';")
 	else:	
 		comando="echo '' > "+salida+";wget -o "+salida+" -O "+archivo+" "+cert+ruta+"/Navegador/imprimir?valores=tienda_-_"+tienda+"_._clave_-_"+clavep+"_._ip_-_"+ip+"_._id_-_"+id_+"_._tipo_-_"+tipo
-	
+	os.system(comando)
+	print 1
 	
 	#comando="echo '' > /tmp/salida_descarga;wget -o /tmp/salida_descarga -O /tmp/FAC-001000000000000000128.pdf http://w3.id.tue.nl/fileadmin/id/objects/E-Atelier/Phidgets/Software/Flash/fl8_tutorials.pdf &"
 
 	#comando="echo '' > /tmp/salida_descarga;wget -o /tmp/salida_descarga -O /tmp/FAC-001000000000000000128.pdf https://forja.rediris.es/docman/view.php/312/.../Postgres-Programmer.pdf &"
-	os.system(comando)
-	print 1
-	
-
 
 
 
@@ -220,36 +202,28 @@ elif accion == "visualizar":
 	id_=form["id"].value
 	tipo=form["tipo"].value
 	nombre=form["nombre"].value
-	imprimir=form["imprimir"].value	
+	tipoDoc=form["tipoDoc"].value
+	#imprimir=form["imprimir"].value
+	if tipoDoc =="PDF":
+		tip_d="pdf"
+	else:
+		tip_d="xlsx"
 
-	if nombre == "Cierre_de_Caja":
-		os.system("wmctrl -l | grep 'Cierre_de_Caja.pdf' | wc -l > /tmp/.spdf")	
-		fich=open("/tmp/.spdf",'r')
-		texto=fich.read() 
-		lista=texto.split('\n')
-		fich.close() 
-		os.system('rm -f /tmp/.spdf')	
-		if lista[0]=="0":
-			os.system("evince "+'/tmp/Cierre_de_Caja.pdf &')
-		else:
-			os.system("wmctrl -a 'Cierre_de_Caja.pdf';")
-
-
-	elif nombre == "Libro_de_Venta":
-		os.system("wmctrl -l | grep 'Libro_de_Venta.xlsx' | wc -l > /tmp/.sxlsx")	
-		fich=open("/tmp/.sxlsx",'r')
-		texto=fich.read() 
-		lista=texto.split('\n')
-		fich.close() 
-		os.system('rm -f /tmp/.sxlsx')	
-		if lista[0]=="0":
-			os.system("soffice --calc "+'/tmp/Libro_de_Venta.xlsx &')
-		else:
-			os.system("wmctrl -a 'Libro_de_Venta.xlsx';")
+	os.system("wmctrl -l | grep '"+nombre+"."+tip_d+"' | wc -l > /tmp/.s"+tip_d+"")	
+	fich=open("/tmp/.s"+tip_d+"",'r')
+	texto=fich.read() 
+	lista=texto.split('\n')
+	fich.close() 
+	os.system('rm -f /tmp/.s'+tip_d+'')	
+	if lista[0]=="0":
+		if tipoDoc =="PDF":
+			os.system("evince "+'/tmp/'+nombre+"."+tip_d+' &')
+		else:		
+			os.system("soffice --calc "+'/tmp/'+nombre+"."+tip_d+' &')
+	else:
+		os.system("wmctrl -a '"+nombre+"."+tip_d+"';")
 
 
-
-	
 elif accion == "verificar":
 	salida="/tmp/salida_descarga"
 	f=open(salida,'r')
