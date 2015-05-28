@@ -138,6 +138,7 @@ elif accion == "estatus":
 		os.system("sleep 1;")		
 
 		'''
+		pruebas
 		rm -f /home/desarrollo/PDF/*;
 		echo ''> /tmp/salida_impresora;
 		echo '' > /tmp/salida_impresora2;
