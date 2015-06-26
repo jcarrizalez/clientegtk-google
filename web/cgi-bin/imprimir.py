@@ -279,7 +279,31 @@ elif accion == "verificar":
 	else:
 		cade="Peso: Calculando.."
 	print cade	
-	os.system("sleep 1;")	
+	os.system("sleep 1;")
+
+
+
+elif accion == "cola":
+	tipo=form["tipo"].value
+	if tipo == "FAC":
+		impresora = factur
+	elif tipo == "COT":
+		impresora = cotiza
+	elif tipo == "DEV":
+		impresora = devolu
+	elif tipo == "NCR":
+		impresora = ntocre
+	elif tipo == "NDB":
+		impresora = ntodeb  
+	else:
+		impresora = report
+
+	if impresora != "NO USAR":
+		printer="/usr/share/system-config-printer/system-config-printer.py --show-jobs "+impresora
+		os.system(printer)
+		print 1
+	else:
+		print 2
 
 
 elif accion == "imprimir":
