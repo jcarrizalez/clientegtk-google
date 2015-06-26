@@ -31,6 +31,6 @@ chmod 777 -R /usr/share/PuntoVenta/;
 chown root.root /usr/share/PuntoVenta/web/cgi-bin/lector;
 chmod +s /usr/share/PuntoVenta/web/cgi-bin/lector;
 #
-#
+#juancarrizalez
 ####################
 exit 0;
